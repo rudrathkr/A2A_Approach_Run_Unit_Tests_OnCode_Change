@@ -39,7 +39,7 @@
   }
 
   @if (isLoading()) {
-    <p class="loading">Loading tasks...</p>
+    <p class="loading">Loading tasks...............................................</p>
   } @else {
     <section class="kanban" aria-label="To-do status board">
       @for (column of columns; track column.status) {
