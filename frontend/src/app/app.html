@@ -1,0 +1,87 @@
+<main class="board-shell">
+  <section class="board-topbar" aria-labelledby="board-title">
+    <div>
+      <p class="eyebrow">Tasks</p>
+      <h1 id="board-title">To-do board</h1>
+    </div>
+
+    <form class="task-form" [formGroup]="todoForm" (ngSubmit)="createTodo()">
+      <label>
+        <span>Title</span>
+        <input
+          name="title"
+          type="text"
+          formControlName="title"
+          maxlength="80"
+          placeholder="Add a task"
+        />
+      </label>
+
+      <label>
+        <span>Details</span>
+        <input
+          name="description"
+          type="text"
+          formControlName="description"
+          maxlength="240"
+          placeholder="Optional"
+        />
+      </label>
+
+      <button type="submit" [disabled]="todoForm.invalid || isSaving()">
+        {{ isSaving() ? 'Adding' : 'Add task' }}
+      </button>
+    </form>
+  </section>
+
+  @if (errorMessage()) {
+    <p class="notice" role="alert">{{ errorMessage() }}</p>
+  }
+
+  @if (isLoading()) {
+    <p class="loading">Loading tasks...</p>
+  } @else {
+    <section class="kanban" aria-label="To-do status board">
+      @for (column of columns; track column.status) {
+        <article class="column" [class]="'column ' + column.accent">
+          <header>
+            <h2>{{ column.title }}</h2>
+            <span>{{ todosByStatus(column.status).length }}</span>
+          </header>
+
+          <div class="task-list">
+            @for (todo of todosByStatus(column.status); track trackByTodoId($index, todo)) {
+              <article class="task">
+                <div>
+                  <h3>{{ todo.title }}</h3>
+                  @if (todo.description) {
+                    <p>{{ todo.description }}</p>
+                  }
+                </div>
+
+                <div class="status-actions" aria-label="Change task status">
+                  @for (targetColumn of columns; track targetColumn.status) {
+                    <button
+                      type="button"
+                      [class.active]="todo.status === targetColumn.status"
+                      [disabled]="todo.status === targetColumn.status"
+                      (click)="changeStatus(todo, targetColumn.status)"
+                    >
+                      {{ targetColumn.title }}
+                    </button>
+                  }
+                </div>
+
+                <button class="remove" type="button" (click)="deleteTodo(todo)">
+                  Remove
+                </button>
+              </article>
+            } @empty {
+              <p class="empty">No tasks</p>
+            }
+          </div>
+        </article>
+      }
+    </section>
+  }
+</main>
