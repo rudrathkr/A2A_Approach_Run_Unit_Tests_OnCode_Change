@@ -1,0 +1,12 @@
+{
+  "name": "todo-a2a-orchestrator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A2A dashboard orchestrator for frontend/backend unit-test automation",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

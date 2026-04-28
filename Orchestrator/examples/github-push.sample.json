@@ -1,0 +1,21 @@
+{
+  "ref": "refs/heads/main",
+  "after": "sample-commit-sha",
+  "repository": {
+    "full_name": "rudrathkr/A2A_Approach_Run_Unit_Tests_OnCode_Change"
+  },
+  "commits": [
+    {
+      "id": "sample-commit-sha",
+      "added": [],
+      "modified": [
+        "frontend/src/app/app.ts",
+        "backend/src/main/java/com/example/todo/TodoController.java"
+      ],
+      "removed": []
+    }
+  ],
+  "head_commit": {
+    "id": "sample-commit-sha"
+  }
+}

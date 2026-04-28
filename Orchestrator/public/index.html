@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A2A Unit Test Orchestrator</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">A2A Dashboard</p>
+          <h1>Code change unit-test orchestration</h1>
+          <p class="subhead">
+            GitHub changes trigger agent status tracking for frontend and backend test generation and execution.
+          </p>
+        </div>
+        <div class="controls">
+          <span id="refreshLabel">Auto refresh: --s</span>
+          <button id="refreshNow" type="button">Refresh</button>
+          <button id="mockFrontend" type="button">Mock frontend</button>
+          <button id="mockBackend" type="button">Mock backend</button>
+          <button id="mockBoth" type="button">Mock both</button>
+        </div>
+      </section>
+
+      <section class="layout">
+        <aside class="runs-panel" aria-label="Runs">
+          <header>
+            <h2>Runs</h2>
+            <span id="runCount">0</span>
+          </header>
+          <div id="runsList" class="runs-list"></div>
+        </aside>
+
+        <section class="detail-panel" aria-live="polite">
+          <div id="emptyState" class="empty-state">
+            Waiting for a GitHub webhook or a mock run.
+          </div>
+          <div id="runDetail" class="run-detail hidden"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

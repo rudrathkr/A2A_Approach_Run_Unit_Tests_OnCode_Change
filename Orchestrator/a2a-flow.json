@@ -1,0 +1,40 @@
+{
+  "name": "Code Change Unit Test A2A Flow",
+  "repository": "https://github.com/rudrathkr/A2A_Approach_Run_Unit_Tests_OnCode_Change.git",
+  "autoRefreshSeconds": 5,
+  "statuses": ["PENDING", "RUNNING", "SUCCESS", "FAILED", "SKIPPED"],
+  "agents": [
+    {
+      "id": "agent1",
+      "name": "Change Detector",
+      "trigger": "GitHub push or pull_request webhook",
+      "responsibility": "Detect changed files and classify them as frontend, backend, both, or ignored."
+    },
+    {
+      "id": "agent2",
+      "name": "Frontend Test Writer",
+      "trigger": "agent1 detects frontend/** changes",
+      "responsibility": "Write or update Angular unit tests for changed frontend code."
+    },
+    {
+      "id": "agent3",
+      "name": "Backend Test Writer",
+      "trigger": "agent1 detects backend/** changes",
+      "responsibility": "Write or update Spring Boot unit tests for changed backend code."
+    },
+    {
+      "id": "agent4",
+      "name": "Unit Test Runner",
+      "trigger": "agent2 and/or agent3 completes successfully",
+      "responsibility": "Run the relevant frontend and/or backend unit tests and publish results."
+    }
+  ],
+  "folderRules": {
+    "frontend": "frontend/**",
+    "backend": "backend/**"
+  },
+  "defaultCommands": {
+    "frontendTests": "npm test -- --watch=false",
+    "backendTests": "mvn test"
+  }
+}
