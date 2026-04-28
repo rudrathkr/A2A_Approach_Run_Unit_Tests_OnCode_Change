@@ -58,7 +58,7 @@ async function refresh() {
 function renderRuns(runs) {
   runCount.textContent = runs.length.toString();
   runsList.innerHTML = runs.map((run) => `
-    <button class="run-button" type="button" data-run-id="${run.id}">
+    <button class="run-button ${run.id === selectedRunId ? 'selected' : ''}" type="button" data-run-id="${run.id}">
       <strong>${run.id}</strong>
       ${statusBadge(run.status)}
       <span class="meta">${run.event} | ${run.branch} | ${run.commit}</span>
@@ -91,7 +91,7 @@ async function renderRunDetail(runId) {
 
     <section class="agent-grid" aria-label="Agent statuses">
       ${run.agents.map((agent) => `
-        <article class="agent-card">
+        <article class="agent-card agent-${agent.status.toLowerCase()}">
           <div>${statusBadge(agent.status)}</div>
           <h3>${agent.name}</h3>
           <p>${agent.summary || 'Waiting.'}</p>
